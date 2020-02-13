@@ -16,6 +16,7 @@ class Engine {
         this.enemies = [];
         // We add the background image to the game
         addBackground(this.root);
+
     }
 
     // The gameLoop will run every few milliseconds. It does several things
@@ -59,6 +60,26 @@ class Engine {
     // This method is not implemented correctly, which is why
     // the burger never dies. In your exercises you will fix this method.
     isPlayerDead = () => {
-        return false;
+
+        // const GAME_WIDTH = 675;
+        // const GAME_HEIGHT = 800;
+        // const PLAYER_WIDTH = 75;
+        // const PLAYER_HEIGHT = 54;
+        //const ENEMY_WIDTH = 75;
+        // const ENEMY_HEIGHT = 156;
+        // const MAX_ENEMIES = 3;
+        let playerXPosition = this.player.x;
+        let playerDead = false;
+        this.enemies.forEach(function (enemy) {
+            if (enemy.y >= GAME_HEIGHT - PLAYER_HEIGHT && enemy.x === playerXPosition) {
+                playerDead = true;
+            }
+        })
+        if (playerDead) {
+            return true
+        }
+
     }
+
 }
+
