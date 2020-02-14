@@ -1,6 +1,12 @@
 // We create an instance of the Engine class. Looking at our index.html,
 // we see that it has a div with an id of \`"app"\`  
 const gameEngine = new Engine(document.getElementById("app"));
+
+const startButton = new Start();
+
+
+
+
 // keydownHandler is a variable that refers to a function. The function has one parameter
 // (does the parameter name matter?) which is called event. As we will see below, this function
 // will be called every time the user presses a key. The argument of the function call will be an object.
@@ -16,8 +22,36 @@ const keydownHandler = event => {
     if (event.code === "ArrowRight") {
         gameEngine.player.moveRight();
     }
+
+    if (event.code === "ArrowUp") {
+        gameEngine.player.moveUp();
+    }
+
+    if (event.code === "ArrowDown") {
+        gameEngine.player.moveDown();
+    }
+
+    if (event.code === "KeyT") {
+        let paperShot = new Paper(playerPosX, playerPosY).shoot();
+
+        // paperShot.Paper.shoot();
+    }
 }
 // We add an event listener to document. document the ancestor of all DOM nodes in the DOM.
 document.addEventListener("keydown", keydownHandler);
 // We call the gameLoop method to start the game
-gameEngine.gameLoop();
+
+// REMOVED so that start button works instead
+// gameEngine.gameLoop();
+
+
+// onload.startButton;
+
+function noScroll() {
+    window.scrollTo(0, 0);
+}
+
+// add listener to disable scroll
+window.addEventListener('scroll', noScroll);
+
+

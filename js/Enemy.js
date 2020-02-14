@@ -1,11 +1,4 @@
-class Entity {
-
-
-
-}
-
-
-class Enemy {
+class Enemy extends Entity {
     // - theRoot refers to the parent DOM element.
     //   We need a way to add the DOM element we create in this constructor to our DOM.
     // - enemySpot is the position of the enemy (either 0, 1, 2, 3 or 4)
@@ -13,6 +6,7 @@ class Enemy {
     // and the 2 parameters provide important information, we must supply 2 arguments to "new" every time we
     // create an instance of this class.
     constructor(theRoot, enemySpot) {
+        super();
         // When we create an Enemy instance, for example, new Enemy(someRoot, 3)
         // A new object is created and the constructor of the Enemy class is called. The context (the \`this\` keyword) is going
         // to be the new object. In these lines of code we see how to add 2 properties to this object: spot, root and gameHeight.
@@ -29,22 +23,24 @@ class Enemy {
         // is still in play. It is set to true whenever the enemy goes past the bottom of the screen.
         // It is used in the Engine to determine whether or not an enemy is in a particular column.
         this.y = -ENEMY_HEIGHT;
-        this.destroyed = false;
+        this.destroyed = false
+
+        this.pic = pic;
+
+
         // We create a new DOM element. The tag of this DOM element is img. It is the DOM node that will display the enemy image
         // to the user. When the enemy is no longer needed, we will use a reference to this DOM node to remove it from the game. This
         // is why we create a property that refers to it.
-        this.domElement = document.createElement('img');
+
+        this.render(this.pic, `${this.x}px`, `${this.y}px`, 5);
+
+        // this.domElement = document.createElement('img');
+
+
         // We give it a src attribute to specify which image to display.
-        this.domElement.src = './images/enemy.png';
-        // We modify the CSS style of the DOM node.
-        this.domElement.style.position = 'absolute';
-        this.domElement.style.left = `${this.x}px`;
-        this.domElement.style.top = `${this.y}px`;
-        this.domElement.style.zIndex = 5;
         // Show that the user can actually see the img DOM node, we append it to the root DOM node.
         theRoot.appendChild(this.domElement);
         this.speed = Math.random() / 2 + 0.25;
-
 
     }
 
@@ -66,4 +62,8 @@ class Enemy {
             this.destroyed = true;
         }
     }
+
+    //trying to add a killed feature to make them disappear. Putting it the entity 
+
+
 }
