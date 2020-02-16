@@ -1,0 +1,11 @@
+.inst {
+    position: absolute; 
+    top: 180px;
+    left: 750px;
+    max-width: 300px;
+    margin-left: 20px;
+    font-family: "Passion One";
+    font-size: 1.5rem;
+    
+}
+
