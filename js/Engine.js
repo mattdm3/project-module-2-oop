@@ -1,9 +1,6 @@
-// The engine class will only be instantiated once. It contains all the logic
-// of the game relating to the interactions between the player and the
-// enemy and also relating to how our enemies are created and evolve over time
+
 class Engine {
-    // The constructor has one parameter. It will refer to the DOM node that we will be adding everything to.
-    // You need to provide the DOM node when you create an instance of the class
+
     constructor(theRoot) {
         // We need the DOM element every time we create a new enemy so we
         // store a reference to it in a property of the instance.
@@ -16,6 +13,7 @@ class Engine {
         this.enemies = [];
         // We add the background image to the game
         addBackground(this.root);
+
     }
 
     // The gameLoop will run every few milliseconds. It does several things
@@ -50,8 +48,23 @@ class Engine {
         // We check if the player is dead. If he is, we alert the user
         // and return from the method (Why is the return statement important?)
         if (this.isPlayerDead()) {
-            window.alert("Game over");
+
+            // CREATE GAME OVER 
+
+            // console.log(this.root);
+            let newText = new NewText();
+
+            // REMOVED ALERT
+            // window.alert("Game over");
             return;
+        }
+
+        // TRYING TO ADD ENEMY DEAD HERE! ******* 
+
+        if (this.isEnemyDead()) {
+            console.log("GOT EM");
+
+
         }
         // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
         setTimeout(this.gameLoop, 20);
@@ -59,6 +72,58 @@ class Engine {
     // This method is not implemented correctly, which is why
     // the burger never dies. In your exercises you will fix this method.
     isPlayerDead = () => {
-        return false;
+
+        let playerYPosition = this.player.y;
+        let playerXPosition = this.player.x;
+        let playerDead = false;
+
+        // console.log(playerYPosition);
+
+        this.enemies.forEach(function (enemy) {
+
+
+            if (enemy.domElement.style.left != "-1000px" && enemy.y + ENEMY_HEIGHT >= playerYPosition &&
+                enemy.y <= playerYPosition + PLAYER_HEIGHT &&
+                enemy.x === playerXPosition) {
+                playerDead = true;
+            }
+        })
+        if (playerDead) {
+            document.removeEventListener("keydown", keydownHandler);
+            return true
+        }
+
     }
+
+    // TRYING TO ADD BULLETS KILLING FUNCTINO HERE 
+
+    isEnemyDead = () => {
+        // check position of paper bullets by making an array? Start with one paper, track its position 
+
+        // ENEMY X AXIS IS MORE THAN OR EQUAL TO paperPosition[0]
+        //  + PAPER_WIDTH - paperPosition[0]
+        let paperYPosition = paperPosition[1];
+        let paperXPosition = paperPosition[0];
+        let enemyDead = false;
+
+        this.enemies.forEach(function (enemy) {
+            // console.log(enemy.domElement.style);
+            if (enemy.y + ENEMY_HEIGHT >= paperYPosition &&
+                enemy.y <= paperYPosition + PLAYER_HEIGHT &&
+                enemy.x === paperXPosition && enemy.y > 5) {
+                enemy.domElement.style.left = "-1000px";
+                enemyDead = true;
+
+            }
+        })
+
+        if (enemyDead) {
+
+            return true
+        }
+
+
+    }
+
 }
+

@@ -39,7 +39,7 @@ const addBackground = root => {
     // We create a new img DOM node.
     const bg = document.createElement("img");
     // We set its src attribute and the height and width CSS attributes
-    bg.src = 'images/stars.png';
+    bg.src = 'images/office.png';
     bg.style.height = `${GAME_HEIGHT}px`;
     bg.style.width = `${GAME_WIDTH}px`;
     // We add it to the root DOM node
